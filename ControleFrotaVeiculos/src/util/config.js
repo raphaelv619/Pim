@@ -2,7 +2,7 @@ const DEBUG = true;
 const BASEDIR_DEV = "https://server.adekz.com/web/casadebolospdv";
 const BASEDIR_PRO = "https://server.adekz.com/web/casadebolospdv";
 const API = "http://192.168.0.102/api";
-const API2 = "https://server.adekz.com/web/metaraphael/api/?";
+const API2 = "https://server.adekz.com/web/metaraphael/api";
 const BASEDIR = DEBUG ? BASEDIR_DEV : BASEDIR_PRO;
 
 

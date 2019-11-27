@@ -143,10 +143,10 @@ class CadastroVeiculos extends Component {
         if (obj.tipo == -1) erro += "Tipo é obrigatório!\n";
         if (obj.situacao == -1) erro += "Situação é obrigatório!\n";
 
-        if (erro != "") {
-            global.alert.alert(erro);
-            return;
-        }
+        // if (erro != "") {
+        //     global.alert.alert(erro);
+        //     return;
+        // }
         let formObj = this.getFormData();
         console.log("FORMMMOBJS", formObj)
         this.props.insertVeiculo(formObj)
