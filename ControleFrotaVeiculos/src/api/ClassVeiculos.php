@@ -2,9 +2,23 @@
 include("ClassConexao.php");
 
 class ClassVeiculos extends ClassConexao{
-    public function getAll(){
+    public function getAll($params){
+
+      $get = "select * from veiculos order by id desc";
+
+      if ($params["params"] != 0 ) {
+        if ($params["params"] == 1){
+          $like = $params["val"];
+          $get = "select * from veiculos where placa like '$like%' order by id desc";
+        } else if ($params["params"] == 2){
+          $like = $params["val"];
+          $get = "select * from veiculos where marca like '$like%' or modelo like '$like%' order by id desc";
+        }
+      } else {
+
+      }
         
-        $BFetch = $this->conectaDb()->prepare("select * from veiculos order by id desc");
+        $BFetch = $this->conectaDb()->prepare($get);
         $BFetch->execute();
 
         $J = [];
@@ -77,10 +91,9 @@ class ClassVeiculos extends ClassConexao{
 }
 
 public function delete($id){
-  var_dump($id);
   try {
     $BFetch = $this->conectaDb()->prepare('DELETE FROM veiculos WHERE id = :id');
-    $BFetch->bindParam(':id', $id); 
+    $BFetch->bindParam(':id', $id["id"]); 
     $BFetch->execute();
     echo $BFetch->rowCount(); 
   } catch(PDOException $e) {

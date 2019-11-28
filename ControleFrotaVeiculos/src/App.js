@@ -7,6 +7,8 @@ import { createStore, applyMiddleware } from 'redux';
 import Routes from './Routes';
 import reducers from './reducers';
 
+import Loading from './components/loading';
+
 import * as services from './services';
 import * as util from './util';
 
@@ -105,6 +107,7 @@ class App extends Component {
         global.store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
         return (
             <Provider store={global.store}>
+                <Loading/>
                 <Routes />
             </Provider>
         );

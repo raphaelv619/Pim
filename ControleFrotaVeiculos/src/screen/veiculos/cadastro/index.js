@@ -182,14 +182,14 @@ class CadastroVeiculos extends Component {
                                             width: 164,
                                             height: 171,
                                         }]}>
-                                            {   this.props.imagem != "" ?
+                                            {   this.props.imagem != null ?
 
                                                 <Image
                                                     style={{ width: '100%', height: '100%' }}
                                                     source={{ uri: this.props.imagem }}
                                                 />
                                                 :
-                                                this.props.imagem_64!= null ?
+                                                this.props.imagem_64!= 'null' ?
                                                 <Image
                                                     style={{ width: '100%', height: '100%' }}
                                                     source={{uri:`data:image/png;base64,${this.props.imagem_64}`}}
@@ -198,7 +198,7 @@ class CadastroVeiculos extends Component {
                                                 :
                                                 <Image
                                                     style={{ width: '100%', height: '100%' }}
-                                                    source={require('../../../assets/images/stilo.jpg')}
+                                                    source={require('../../../assets/images/default-car.png')}
 
                                                 />
                                             }

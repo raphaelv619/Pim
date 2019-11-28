@@ -1,27 +1,24 @@
 import axios from 'axios';
+
 class VeiculosRest {
 
-    getAll() {
+    getAll(params=0, val=null) {
         return new Promise((resolve, reject) => {
-            axios.get(`${global.config.api2}/?classe=ClassVeiculos&metodo=getAll`, {
+            axios.get(`${global.config.api}/`, {params:{params, val}
             }).then(function (response) {
-                console.log('res', response.data);
                 resolve (response.data);
             }).catch(error => {
-                console.log('error_', error)
             })
         })
     }
 
     insert(obj) {
-        console.log("OBJJ", obj)
         return new Promise((resolve, reject) => {
             axios({
                 method: 'post',
-                url: `${global.config.api2}/`,
+                url: `${global.config.api}/`,
                 data: obj,
               }).then(function (response) {
-                console.log("RESSSS", response)
                 resolve (response);
             }).catch(error => {
                 
@@ -32,8 +29,7 @@ class VeiculosRest {
     delete(id){
         console.log(id)
         return new Promise((resolve, reject) => {
-            axios.delete(`${global.config.api2}/`, {params: {id: id}}).then(function (response) {
-                console.log("RESSSS", response)
+            axios.delete(`${global.config.api}/`, {params: {id: id}}).then(function (response) {
                 resolve (response);
             }).catch(error => {
                

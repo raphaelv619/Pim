@@ -26,7 +26,7 @@ class DetalhesVeiculo extends Component {
                 {/* image login header */}
                 <ScrollView>
                     <ImageBackground
-                        source={ item.imagem != null ? {uri:`data:image/png;base64,${item.imagem}`} : require('../../../assets/images/stilo.jpg')}
+                        source={ item.imagem != 'null' ? {uri:`data:image/png;base64,${item.imagem}`} : require('../../../assets/images/default-car.png')}
                         resizeMode={'cover'} style={styles.imageLogin}>
                         <LinearGradient start={{ x: 0.8, y: -0.1 }}
                             end={{ x: 0.8, y: 1.0 }}

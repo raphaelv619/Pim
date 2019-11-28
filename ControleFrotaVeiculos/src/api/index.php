@@ -14,13 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 else if ($_SERVER['REQUEST_METHOD'] == 'DELETE' ) {
     $classe = new ClassVeiculos();
-    $classe->delete('');
+    $classe->delete($_GET);
 } 
 else {
-    $nomeClasse = $_GET['classe'];
-    $metodo  = $_GET['metodo'];
-    $classe = new $nomeClasse();
-    $classe->$metodo();
+    $classe = new ClassVeiculos();
+    $classe->getAll($_GET);
 }
 
 

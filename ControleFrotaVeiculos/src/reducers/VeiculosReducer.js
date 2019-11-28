@@ -10,7 +10,7 @@ const INITIAL_STATE = {
         modelo:'',
         cor:'',
         km_atual:'',
-        imagem:'',
+        imagem:null,
         imagem_64:null,
         combustivel:-1,
         motorizacao:-1,
