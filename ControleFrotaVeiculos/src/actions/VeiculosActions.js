@@ -1,4 +1,4 @@
-import { Toast } from 'native-base';
+import { ToastAndroid } from 'react-native';
 import { Actions } from "react-native-router-flux";
 
 
@@ -27,7 +27,7 @@ export const insertVeiculo = (obj, edit) => {
         global.veiculos.insert(obj).then(res=>{
             dispatch({ type: 'INSERT_VEICULO', payload: '' });
             global.hide()
-            Toast.show({ text: 'Veículo inserido com sucesso.' });
+            ToastAndroid.show('Veículo cadastrado com sucesso.', ToastAndroid.LONG);
             if(edit == 1){
                 Actions.veiculos();
             }
@@ -35,8 +35,10 @@ export const insertVeiculo = (obj, edit) => {
                 Actions.pop();
             }
             global.veiculos.getAll().then(res => {
+                global.hide()
                 dispatch({ type: 'GET_VEICULOS', payload: res });
             }).catch(error => {
+                global.hide()
                 global.alert.alert('Erro ao retornar dados do servidor')
             })
         }).catch(error=>{
@@ -51,10 +53,12 @@ export const deleteVeiculo = (id) => {
         global.show()
         global.veiculos.delete(id).then(res=>{
             global.hide()
-            Toast.show({ text: 'Veículo excluido com sucesso.' });
+            ToastAndroid.show('Veículo excluido com sucesso.', ToastAndroid.LONG);
             global.veiculos.getAll().then(res=>{
+                global.hide()
                 dispatch({ type: 'GET_VEICULOS', payload: res });
             }).catch(error=>{
+                global.hide()
                 global.alert.alert('Erro ao retornar dados do servidor')
             })
         }).catch(error=>{

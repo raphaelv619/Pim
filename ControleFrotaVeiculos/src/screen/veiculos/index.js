@@ -295,6 +295,7 @@ class Veiculos extends Component {
                                 data={this.props.veiculos}
                                 renderItem={this._renderItem}
                                 vertical
+                                refreshing={true}
                                 showsHorizontalScrollIndicator={false}
                                 ListHeaderComponent={this._renderHeaderList}
                                 ListFooterComponent={<View style={{ marginBottom: this.props.veiculos.length == 1 ? 200 : 80 }} />}

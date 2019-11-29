@@ -19,6 +19,7 @@ class CadastroVeiculos extends Component {
     }
 
     componentDidMount(){
+        console.log("PROPS", this.props);
         if(this.props.edit){
             this.props.modificaCampo(this.props.item, 'EDITA_OBJETO_VEICULO', '');
         }
@@ -137,10 +138,10 @@ class CadastroVeiculos extends Component {
         if (obj.modelo == "") erro += "Modelo é obrigatório!\n";
         if (obj.cor == "") erro += "Cor é obrigatório!\n";
         if (obj.km_atual == "") erro += "Kilometragem é obrigatório!\n";
-        if (obj.combustivel == -1) erro += "Combustivel é obrigatório!\n";
-        if (obj.motorizacao == -1) erro += "Motorização é obrigatório!\n";
-        if (obj.tipo == -1) erro += "Tipo é obrigatório!\n";
-        if (obj.situacao == -1) erro += "Situação é obrigatório!\n";
+        if (obj.combustivel.val == -1) erro += "Combustivel é obrigatório!\n";
+        if (obj.motorizacao.val == -1) erro += "Motorização é obrigatório!\n";
+        if (obj.tipo.val == -1) erro += "Tipo é obrigatório!\n";
+        if (obj.situacao.val == -1) erro += "Situação é obrigatório!\n";
 
         if (erro != "") {
             global.alert.alert(erro);
@@ -154,6 +155,7 @@ class CadastroVeiculos extends Component {
     }
 
     render() {
+        console.log("PROPSSSS", this.props, this.props.imagem_64)
         return (
 
             <View style={{ flex: 1, backgroundColor: 'white' }}>
@@ -180,24 +182,23 @@ class CadastroVeiculos extends Component {
                                             height: 171,
                                         }]}>
                                             {   this.props.imagem != null ?
-
+                                           
                                                 <Image
                                                     style={{ width: '100%', height: '100%' }}
                                                     source={{ uri: this.props.imagem }}
-                                                />
+                                                    />
                                                 :
-                                                this.props.imagem_64!= null ?
+                                                this.props.imagem_64 != 'null' || this.props.imagem_64 != null   ?
                                                 <Image
                                                     style={{ width: '100%', height: '100%' }}
-                                                    source={{uri:`data:image/png;base64,${this.props.imagem_64}`}}
-
-                                                />
+                                                    source={{uri:`data:image/png;base64,${this.props.imagem_64}`}} 
+                                                />  
                                                 :
-                                                <Image
+                                                 <Image
                                                     style={{ width: '100%', height: '100%' }}
                                                     source={require('../../../assets/images/default-car.png')}
-
                                                 />
+                                                   
                                             }
 
 
