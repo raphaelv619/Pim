@@ -1,24 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView, StatusBar } from 'react-native';
-import DeviceInfo from 'react-native-device-info';
+import { View, Text, TouchableOpacity, Image, ScrollView, } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
-import { connect } from 'react-redux';
 
-import { button, MyIcon } from '../../components';
+import { MyIcon } from '../../components';
 
 
 import styles from './styles';
 
 export default class MenuContainer extends Component {
 
-    _sair() {
-        global.alert.confirm("Gostaria de sair?", () => {
-            global.bootstrap.logout().then(() => {
-                Actions.login();
-            });
-        });
-    }
 
     render() {
 
@@ -52,7 +43,7 @@ export default class MenuContainer extends Component {
 
                     <ScrollView>
 
-                        <TouchableOpacity onPress={() => Actions.home()} style={styles.btnMenu}>
+                        <TouchableOpacity onPress={() => global.alert.alert('Em desenvolvimento.')} style={styles.btnMenu}>
 
                             <View style={{width:27}}>
 
@@ -80,7 +71,7 @@ export default class MenuContainer extends Component {
 
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => { Actions.endereco() }}>
+                        <TouchableOpacity onPress={() => global.alert.alert('Em desenvolvimento.')}>
 
                             <View style={styles.btnMenu}>
 
@@ -96,7 +87,7 @@ export default class MenuContainer extends Component {
 
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => { Actions.fidelidade() }}>
+                        <TouchableOpacity onPress={() => global.alert.alert('Em desenvolvimento.')}>
 
                             <View style={styles.btnMenu}>
 
@@ -112,7 +103,7 @@ export default class MenuContainer extends Component {
 
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => { Actions.userEdit() }}>
+                        <TouchableOpacity onPress={() => global.alert.alert('Em desenvolvimento.')}>
 
                             <View style={styles.btnMenu}>
 
@@ -120,7 +111,8 @@ export default class MenuContainer extends Component {
 
 
 
-                                <MyIcon name='arrows-h' size={22} style={{ color: 'white' }} />
+                                {/* <MyIcon name='arrows-h' size={22} style={{ color: 'white' }} /> */}
+                                    <Image source={require('../../assets/icons/inout.png')} style={{ width: 24, height: 24 }} />
                                 </View>
 
                                 <Text style={styles.btnMenuText}>Entrada/Saída</Text>
@@ -130,14 +122,15 @@ export default class MenuContainer extends Component {
                         </TouchableOpacity>
 
 
-                        <TouchableOpacity onPress={() => { Actions.userEdit() }}>
+                        <TouchableOpacity onPress={() => global.alert.alert('Em desenvolvimento.')}>
 
                             <View style={styles.btnMenu}>
 
                                 <View style={{width:27}}>
 
                                     
-                                <MyIcon name='money' size={22} style={{ color: 'white' }} />
+                                {/* <MyIcon name='money' size={22} style={{ color: 'white' }} /> */}
+                                    <Image source={require('../../assets/icons/finan.png')} style={{ width: 24, height: 24 }} />
                                 </View>
 
                                 <Text style={styles.btnMenuText}>Financeiro</Text>
@@ -146,7 +139,7 @@ export default class MenuContainer extends Component {
 
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => { Actions.userEdit() }}>
+                        <TouchableOpacity onPress={() => global.alert.alert('Em desenvolvimento.')}>
 
                             <View style={styles.btnMenu}>
 
@@ -164,14 +157,15 @@ export default class MenuContainer extends Component {
 
                         <View style={{ flex: 1 }} />
 
-                        <TouchableOpacity onPress={() => { this._sair() }}>
+                        <TouchableOpacity onPress={() => global.alert.alert('Em desenvolvimento.')}>
 
                             <View style={styles.btnMenu}>
 
                                 <View style={{width:27}}>
 
 
-                                <MyIcon name='log-out' size={22} style={{ color: 'white' }} />
+                                {/* <MyIcon name='log-out' size={22} style={{ color: 'white' }} /> */}
+                                    <Image source={require('../../assets/icons/logout.png')} style={{ width: 24, height: 24 }} />
                                 </View>
 
                                 <Text style={styles.btnMenuText}>Sair</Text>
@@ -184,14 +178,7 @@ export default class MenuContainer extends Component {
 
                 </View>
 
-                {/* app version  */}
-
-                <View style={{ position: 'absolute', bottom: 14, left: 14, }}>
-
-                    <Text style={{ color: '#777', fontSize: 10, }}>V.: {DeviceInfo.getVersion()} </Text>
-
-                </View>
-
+             
             </View>
         );
     }

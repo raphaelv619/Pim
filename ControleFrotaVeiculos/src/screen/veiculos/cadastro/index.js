@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput, ScrollView, Picker, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, Image, TextInput, ScrollView, Picker, TouchableWithoutFeedback, StatusBar } from 'react-native';
 import { Form } from 'native-base';
 import ImagePicker from 'react-native-image-picker';
 
@@ -10,7 +10,6 @@ import { colors, styles } from '../../../styles';
 import { Button, } from '../../../components';
 import Header from '../../../components/header';
 
-// import {Camera} from '../../../util';
 
 class CadastroVeiculos extends Component {
 
@@ -143,22 +142,26 @@ class CadastroVeiculos extends Component {
         if (obj.tipo == -1) erro += "Tipo é obrigatório!\n";
         if (obj.situacao == -1) erro += "Situação é obrigatório!\n";
 
-        // if (erro != "") {
-        //     global.alert.alert(erro);
-        //     return;
-        // }
+        if (erro != "") {
+            global.alert.alert(erro);
+            return;
+        }
         let formObj = this.getFormData();
         console.log("FORMMMOBJS", formObj)
-        this.props.insertVeiculo(formObj)
+        let edit = this.props.edit ? 1 : 0
+        this.props.insertVeiculo(formObj, edit)
 
     }
 
     render() {
-
         return (
 
             <View style={{ flex: 1, backgroundColor: 'white' }}>
+                <StatusBar backgroundColor={'#333'} backgroundColor='#333' barStyle="light-content" />
+               
+
                 <Header home />
+             
 
                 <ScrollView>
 
@@ -168,12 +171,6 @@ class CadastroVeiculos extends Component {
 
                             <Form style={{ paddingLeft: 10, }}>
 
-                                {/* user add image sing */}
-
-
-
-
-                                
                                     <View style={styles.contentAddUserImage}>
 
                                     <TouchableWithoutFeedback onPress={() => this._takeImage()}>
@@ -189,7 +186,7 @@ class CadastroVeiculos extends Component {
                                                     source={{ uri: this.props.imagem }}
                                                 />
                                                 :
-                                                this.props.imagem_64!= 'null' ?
+                                                this.props.imagem_64!= null ?
                                                 <Image
                                                     style={{ width: '100%', height: '100%' }}
                                                     source={{uri:`data:image/png;base64,${this.props.imagem_64}`}}
@@ -228,6 +225,7 @@ class CadastroVeiculos extends Component {
                                         placeholder={"Ano do modelo"}
                                         onChangeText={texto => this.props.modificaCampo(texto, 'MODIFICA_OBJETO_VEICULO', 'ano_modelo')}
                                         value={this.props.ano_modelo}
+                                        keyboardType={'numeric'}
                                     />
                                 </View>
 
@@ -238,6 +236,7 @@ class CadastroVeiculos extends Component {
                                         placeholder={"Ano de fabricação"}
                                         onChangeText={texto => this.props.modificaCampo(texto, 'MODIFICA_OBJETO_VEICULO', 'ano_fabr')}
                                         value={this.props.ano_fabr}
+                                        keyboardType={'numeric'}
                                     />
                                 </View>
 
@@ -327,6 +326,7 @@ class CadastroVeiculos extends Component {
                                         placeholder={"Km atual"}
                                         onChangeText={texto => this.props.modificaCampo(texto, 'MODIFICA_OBJETO_VEICULO', 'km_atual')}
                                         value={this.props.km_atual}
+                                        keyboardType={'numeric'}
                                     />
                                 </View>
 

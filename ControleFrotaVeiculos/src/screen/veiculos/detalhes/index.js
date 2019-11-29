@@ -1,29 +1,20 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableNativeFeedback, StatusBar, ImageBackground, Image, Animated, TouchableWithoutFeedback, ScrollView } from 'react-native';
-import { Form } from 'native-base';
+import { View, Text,  StatusBar, ImageBackground,TouchableWithoutFeedback, ScrollView } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-// import { modificaCampo, phpLogin_Login } from '../../../actions';
 
 import { colors, styles, fonts } from '../../../styles';
-import { Button, Content, Input, ButtonText, MyIcon } from '../../../components';
+import { Button, MyIcon } from '../../../components';
 import LinearGradient from 'react-native-linear-gradient';
-import ParallaxScroll from '@monterosa/react-native-parallax-scroll';
 
 class DetalhesVeiculo extends Component {
 
     render() {
-        console.log("ITEMMM", this.props.item)
-
         const item = this.props.item;
-
-        console.log("ITEM", item)
-
         return (
             <View style={{ backgroundColor: 'white' }}>
                 <StatusBar backgroundColor={'transparent'} translucent barStyle="light-content" />
-                {/* image login header */}
                 <ScrollView>
                     <ImageBackground
                         source={ item.imagem != 'null' ? {uri:`data:image/png;base64,${item.imagem}`} : require('../../../assets/images/default-car.png')}
@@ -35,9 +26,7 @@ class DetalhesVeiculo extends Component {
                             colors={colors.vetColorsGradienteLogin}>
                         </LinearGradient>
                     </ImageBackground>
-                    {/* content login */}
                     <View style={[styles.contentLogin, { marginBottom: 54 }]}>
-                        {/* title login */}
                         <View style={{ marginBottom: 20 }}>
                             <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
                             <Text style={[styles.blockInfoHomeTitle, { fontSize: fonts.extraForce, color: 'black', marginVertical: 5 }]}>
@@ -168,10 +157,7 @@ class DetalhesVeiculo extends Component {
 
 const mapStateToProps = state => (
     {
-        login: state.PhpLoginReducer.login,
-        password: state.PhpLoginReducer.password,
-        erro_login: state.PhpLoginReducer.erro_login,
-        loading_login: state.PhpLoginReducer.loading_login
+        
     }
 )
 

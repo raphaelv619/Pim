@@ -1,18 +1,14 @@
 import React, { Component, } from 'react';
-import { ActivityIndicator, View, Text, Image, StatusBar, TouchableWithoutFeedback, Dimensions } from 'react-native';
+import { View, Text, Image, StatusBar, TouchableWithoutFeedback,} from 'react-native';
 
 import styles from './styles';
 import { colors } from '../../styles';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { MyIcon } from '..';
-import TouchableScale from 'react-native-touchable-scale';
 
 class Header extends Component {
 
-  // this is when u have in dev. your app ( a line red in header)
-
-  
 
   // menu left position
 
@@ -73,7 +69,7 @@ class Header extends Component {
     return (
 
       <View style={styles.logo}>
-        <TouchableWithoutFeedback onPress={() => { Actions.home() }}>
+        <TouchableWithoutFeedback onPress={() => {} }>
           <Image source={require('../../assets/images/logo-drive.png')} style={{ width: 142, height: 56, }} />
           {/* <Text style={styles.headerText}>Controle Frota</Text> */}
         </TouchableWithoutFeedback>
@@ -92,25 +88,13 @@ class Header extends Component {
       return (
 
         // bell &&
-        <TouchableWithoutFeedback onPressOut={() => { return Actions.notification() }}>
+        <TouchableWithoutFeedback onPress={() => global.alert.alert('Em desenvolvimento.')}>
 
           <View style={styles.btnHead}>
 
             <MyIcon name='bell' size={22} style={{ color: 'white' }} />
 
             <View style={[styles.haveNotify,]}>
-
-              {this.props.total_msg > 0 && this.props.total_msg <= 9 && <View style={styles.notify}>
-
-                <Text style={styles.numberNotify}>{this.props.total_msg}</Text>
-
-              </View>}
-
-              {this.props.total_msg > 9 && <View style={styles.notify}>
-
-                <Text style={styles.numberNotify}>9+</Text>
-
-              </View>}
 
             </View>
 
@@ -139,8 +123,6 @@ class Header extends Component {
 
             <StatusBar backgroundColor={'#333'} backgroundColor='#333' barStyle="light-content" />
 
-            {/* {this.dev()} */}
-
             <View style={[styles.headerViewLeft]}>
 
               {this._menuLeft()}
@@ -161,26 +143,6 @@ class Header extends Component {
 
           </View>
 
-          {/* <View style={styles.headInfoHome}>
-
-              <Text style={styles.titleHeadInfoHome}>Fidelidade</Text>
-
-              <View style={styles.blockInfoHome}>
-
-                  <Text style={styles.blockInfoHomeTitle}>4.368</Text> 
-                  
-                  <Text style={styles.blockInfoHomeSubtitle}>Pts</Text>
-
-              </View>
-
-              <TouchableScale style={styles.ballInfoHeadInfo}>
-
-                  <MyIcon name='question1' size={14} style={{color: colors.white}}/>
-
-              </TouchableScale>
-
-          </View> */}
-
         </View>
 
       );
@@ -192,8 +154,6 @@ class Header extends Component {
         <View style={[styles.header, { backgroundColor: this.props.headerChoco ? colors.default : colors.white }]}>
 
           <StatusBar backgroundColor={colors.white} backgroundColor={this.props.headerChoco ? colors.default : "#fff0"} barStyle="dark-content" />
-
-          {/* {this.dev()} */}
 
           <View style={[styles.headerViewLeft]}>
 
@@ -224,7 +184,7 @@ class Header extends Component {
 
 const mapStateToProps = state => (
   {
-    total_msg: state.MsgsReducer.total_msg
+
   }
 )
 

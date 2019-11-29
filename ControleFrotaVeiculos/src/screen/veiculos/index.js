@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { View, Text, Image, ScrollView, FlatList, TextInput, TouchableWithoutFeedback, Modal, TouchableOpacity } from 'react-native';
 
-// import { Actions } from 'react-native-router-flux';
-// import { connect } from 'react-redux';
-
-import { colors, styles } from '../../styles';
-import { Button, Content, Input, MyIcon, StripedBackground, Tabs } from '../../components';
-import Header from '../../components/header';
 import TouchableScale from 'react-native-touchable-scale';
-import ParallaxScroll from '@monterosa/react-native-parallax-scroll';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { getVeiculos, deleteVeiculo } from '../../actions';
+
+import { colors, styles } from '../../styles';
+import {  MyIcon, } from '../../components';
+import Header from '../../components/header';
+
+import { getVeiculos, deleteVeiculo, modificaCampo } from '../../actions';
 
 
 
@@ -40,23 +38,15 @@ class Veiculos extends Component {
                     nome: 'ticket-alt',
                     texto: 'Multas'
                 },
-                // {
-                //     nome:'tire',
-                //     texto:'Pneus'
-                // }
+                {
+                    nome:'pneu',
+                    texto:'Pneus'
+                }
             ]
         }
     }
 
-
-    componentWillMount() {
-        if (this.props.param) {
-            this.setState({ carrinhoVisible: true })
-        }
-    }
-
     componentDidMount() {
-        console.log("CAI NODID")
         this.props.getVeiculos();
     }
 
@@ -79,6 +69,11 @@ class Veiculos extends Component {
         this.setState({ modalVisible: true })
     }
 
+    _add(){
+        this.props.modificaCampo('', 'INSERT_VEICULO', '');
+        Actions.cadastrarVeiculo();
+    }
+
     _modalFilter() {
         if (this.state.modalVisible) {
             return (
@@ -96,7 +91,7 @@ class Veiculos extends Component {
                         <TouchableWithoutFeedback onPress={()=>{}}>
 
                         
-                        <View style={{ backgroundColor: 'white', elevation: 1, marginTop: 70, padding: 10, paddingRight: 120, borderRadius: 10,  alignItems: 'flex-start' }}>
+                        <View style={{ backgroundColor: 'white', elevation: 1, marginTop: 70, padding: 10, paddingRight: 60, borderRadius: 10,  alignItems: 'flex-start' }}>
                             <Text style={{ fontSize: 16, marginTop: 10, fontWeight:'bold' }}>Selecione um filtro</Text>
                             <View style={{ marginTop: 10, marginBottom: 20 }}>
                                 <TouchableOpacity onPress={()=>this.setState({filtro:1})}>
@@ -135,10 +130,13 @@ class Veiculos extends Component {
 
         return (
 
-            <TouchableScale style={[styles.itemListFilter]} >
+            <TouchableScale style={[styles.itemListFilter]} onPress={()=> index == 0 ? {} : global.alert.alert('Em desenvolvimento.')}>
                 <View style={{ alignItems: 'center' }}>
-
+                    {item.nome == 'pneu' ? 
+                    <Image source={require('../../assets/icons/tire.png')} style={{width:24, height:24}} />
+                    :
                     <MyIcon name={item.nome} size={22} style={{ color: index == 0 ? '#a67c00' : 'white' }} />
+                    }
                     <Text style={{ color: index == 0 ? '#a67c00' : 'white', marginTop: 3, fontSize: 16 }}>{item.texto}</Text>
                 </View>
 
@@ -148,9 +146,8 @@ class Veiculos extends Component {
 
     }
 
-    //  product
 
-    _renderProductSearch = ({ }) => {
+    _renderHeaderList = ({ }) => {
 
         return (
 
@@ -161,7 +158,7 @@ class Veiculos extends Component {
 
 
                 <View style={[{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginHorizontal: 20, marginTop: 15, }]}>
-                    <TouchableWithoutFeedback onPress={() => Actions.cadastrarVeiculo()}>
+                    <TouchableWithoutFeedback onPress={() => this._add()}>
 
                         <View style={{ alignItems: 'center', justifyContent: 'center', flexDirection: 'row', marginLeft: 0, borderWidth: 1, borderColor: colors.greyLine, borderRadius: 6, height: 46, width: 150 }}>
                             <MyIcon name='plus' size={22} style={{ color: '#a67c00' }} />
@@ -204,9 +201,7 @@ class Veiculos extends Component {
 
     }
 
-    _renderItemProduct = ({ item, index }) => {
-        console.log("ITEMMM", item)
-
+    _renderItem = ({ item, index }) => {
         return (
 
             <TouchableWithoutFeedback onLongPress={() => this._delete(item.id)} onPress={() => Actions.detalhesVeiculo({ item: item })}>
@@ -243,17 +238,9 @@ class Veiculos extends Component {
 
                             <View style={styles.cardProductMainPrice}>
 
-                                {/* <Text style={styles.cardProductSubPrice}>R$58,90</Text> */}
-
                                 <Text style={[styles.cardProductPrice]}>Detalhes</Text>
 
                             </View>
-
-                            {/* <View style={styles.cardProductMorePay}>
-
-                                <Text style={styles.cardProductMorePayText}>Mais Vendido</Text>
-
-                            </View> */}
 
                         </View>
 
@@ -266,42 +253,28 @@ class Veiculos extends Component {
         )
 
     }
-    async teste() {
-        this.props.getVeiculos();
-    }
 
     render() {
 
         return (
 
-            <View style={[styles.contentRelative, { backgroundColor: '#333' }]}>
+            <View style={[styles.contentRelative, { backgroundColor: '#333', }]}>
 
-                {/* <StripedBackground /> */}
 
                 {this._modalFilter()}
-                <View style={{ zIndex: 1 }}>
+                <View style={{ zIndex: 1, flex:1 }}>
 
-                    <View style={{ elevation: 4 }}>
+                    <View style={{ elevation: 4, }}>
 
                         <Header menu bell home />
 
                     </View>
 
-                    <ScrollView>
+                    <ScrollView style={{flex:1, }}>
 
 
 
                         <View>
-
-                            {/* <View style={styles.headInfoHome}>
-
-<View style={{ borderColor:'white', borderWidth:1, height:32, width:32, borderRadius:100, alignItems:'center', justifyContent:'center', }}>
-<Text style={{fontSize:28, color:'white', marginBottom:2}}>+</Text>
-</View>
-<Text style={{marginTop:3, fontSize:14, color:'white'}}>Adicionar</Text>
-
-
-</View> */}
 
 
                             <View style={[styles.flatFilterHome]}>
@@ -320,55 +293,19 @@ class Veiculos extends Component {
 
                             <FlatList
                                 data={this.props.veiculos}
-                                renderItem={this._renderItemProduct}
+                                renderItem={this._renderItem}
                                 vertical
                                 showsHorizontalScrollIndicator={false}
-                                ListHeaderComponent={this._renderProductSearch}
-                                ListFooterComponent={<View style={{ marginBottom: this.state.carrinhoVisible == true ? 105 : 50 }} />}
+                                ListHeaderComponent={this._renderHeaderList}
+                                ListFooterComponent={<View style={{ marginBottom: this.props.veiculos.length == 1 ? 200 : 80 }} />}
                                 style={styles.contentDefaultHome}
-                                ListEmptyComponent={()=><View style={{flex:1, padding:10}}><Text style={{fontSize:18, marginLeft:12, height:300}}>Nenhum veículo cadastrado</Text></View>} />
+                                ListEmptyComponent={()=><View style={{flex:1, padding:10}}><Text style={{fontSize:18, marginLeft:12, height:400}}>Nenhum veículo cadastrado</Text></View>} />
 
 
                         </View>
 
 
                     </ScrollView>
-
-                    {this.state.carrinhoVisible == true &&
-                        <TouchableWithoutFeedback
-                            onPress={() => { Actions.pedido() }}
-                        >
-
-                            <View
-                                style={[styles.buttonFull,
-                                {
-                                    position: 'absolute',
-                                    bottom: 0,
-                                    right: 0,
-                                    left: 0,
-                                    zIndex: 1,
-                                    marginBottom: 75,
-                                }]}>
-
-                                <View style={styles.itemCar}>
-
-                                    <Text style={styles.numberItemCar}>1</Text>
-
-                                    <Text style={styles.textItemCar}>Itens no carrinho</Text>
-
-                                </View>
-
-                                <MyIcon name='shopping-cart3' size={22} style={{ color: '#fff' }} />
-
-                            </View>
-
-                        </TouchableWithoutFeedback>
-                    }
-
-                    {/* <View style={{ zIndex: 10 }}> */}
-
-
-                    {/* </View> */}
 
                 </View>
 
@@ -381,12 +318,9 @@ class Veiculos extends Component {
 
 const mapStateToProps = state => (
     {
-        login: state.PhpLoginReducer.login,
-        password: state.PhpLoginReducer.password,
-        erro_login: state.PhpLoginReducer.erro_login,
-        loading_login: state.PhpLoginReducer.loading_login,
-        veiculos: state.VeiculosReducer.veiculos
+        veiculos: state.VeiculosReducer.veiculos,
+        change: state.VeiculosReducer.change
     }
 )
 
-export default connect(mapStateToProps, { getVeiculos, deleteVeiculo })(Veiculos);
+export default connect(mapStateToProps, { getVeiculos, deleteVeiculo, modificaCampo })(Veiculos);

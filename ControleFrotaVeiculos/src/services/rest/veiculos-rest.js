@@ -4,7 +4,7 @@ class VeiculosRest {
 
     getAll(params=0, val=null) {
         return new Promise((resolve, reject) => {
-            axios.get(`${global.config.api}/`, {params:{params, val}
+            axios.get(`${global.config.api2}/`, {params:{params, val}
             }).then(function (response) {
                 resolve (response.data);
             }).catch(error => {
@@ -16,12 +16,11 @@ class VeiculosRest {
         return new Promise((resolve, reject) => {
             axios({
                 method: 'post',
-                url: `${global.config.api}/`,
+                url: `${global.config.api2}/`,
                 data: obj,
               }).then(function (response) {
                 resolve (response);
             }).catch(error => {
-                
             });
         })
     }
@@ -29,7 +28,7 @@ class VeiculosRest {
     delete(id){
         console.log(id)
         return new Promise((resolve, reject) => {
-            axios.delete(`${global.config.api}/`, {params: {id: id}}).then(function (response) {
+            axios.delete(`${global.config.api2}/`, {params: {id: id}}).then(function (response) {
                 resolve (response);
             }).catch(error => {
                
