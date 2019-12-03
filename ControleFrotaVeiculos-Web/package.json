@@ -2,6 +2,7 @@
   "name": "ControleFrotaWeb",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://raphaelv619.github.io",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -b master -d build",
