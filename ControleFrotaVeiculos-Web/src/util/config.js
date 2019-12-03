@@ -1,7 +1,6 @@
 
-// const API2 = "http://***.***.*.***/api";
+const API2 = "http://***.***.*.***/api";
 const API = "https://teste/api";
-const API2 = "https://server.adekz.com/web/metaraphael/api";
 
 var config = {
 	api: API,
