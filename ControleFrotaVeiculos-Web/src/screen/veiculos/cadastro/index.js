@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TextInput, ScrollView, Picker, TouchableWithoutFeedback, StatusBar } from 'react-native';
 import { Form } from 'native-base';
-import ImagePicker from 'react-native-image-picker';
+// import ImagePicker from 'react-native-image-picker';
 
 import { connect } from 'react-redux';
 import { modificaCampo, insertVeiculo } from '../../../actions';
@@ -18,54 +18,53 @@ class CadastroVeiculos extends Component {
         this.state = {}
     }
 
-    componentDidMount(){
-        console.log("PROPS", this.props);
-        if(this.props.edit){
+    componentDidMount() {
+        if (this.props.edit) {
             this.props.modificaCampo(this.props.item, 'EDITA_OBJETO_VEICULO', '');
         }
     }
 
-    _takeImage() {
-        const options = {
-            title: 'Foto',
-            storageOptions: {
-                skipBackup: true,
-                cameraRoll: true,
-                path: 'images'
-            },
-            cancelButtonTitle: 'Cancelar',
-            takePhotoButtonTitle: 'Tire uma Foto',
-            chooseFromLibraryButtonTitle: 'Escolha uma Foto',
-            mediaType: 'photo',
-        };
+    // _takeImage() {
+    //     const options = {
+    //         title: 'Foto',
+    //         storageOptions: {
+    //             skipBackup: true,
+    //             cameraRoll: true,
+    //             path: 'images'
+    //         },
+    //         cancelButtonTitle: 'Cancelar',
+    //         takePhotoButtonTitle: 'Tire uma Foto',
+    //         chooseFromLibraryButtonTitle: 'Escolha uma Foto',
+    //         mediaType: 'photo',
+    //     };
 
-        /**
-         * The first arg is the options object for customization (it can also be null or omitted for default options),
-         * The second arg is the callback which sends object: response (more info in the API Reference)
-         */
-        ImagePicker.showImagePicker(options, (response) => {
-            console.log('Response = ', response);
+    //     /**
+    //      * The first arg is the options object for customization (it can also be null or omitted for default options),
+    //      * The second arg is the callback which sends object: response (more info in the API Reference)
+    //      */
+    //     ImagePicker.showImagePicker(options, (response) => {
+    //         console.log('Response = ', response);
 
-            if (response.didCancel) {
-                console.log('User cancelled image picker');
-            } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
-            } else if (response.customButton) {
-                console.log('User tapped custom button: ', response.customButton);
-            } else {
-                const source = { uri: response.uri, data: response.data };
+    //         if (response.didCancel) {
+    //             console.log('User cancelled image picker');
+    //         } else if (response.error) {
+    //             console.log('ImagePicker Error: ', response.error);
+    //         } else if (response.customButton) {
+    //             console.log('User tapped custom button: ', response.customButton);
+    //         } else {
+    //             const source = { uri: response.uri, data: response.data };
 
-                // You can also display the image using data:
-                // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-                console.log("SORRRRC", source.uri)
-                this.props.modificaCampo(source.uri, 'MODIFICA_OBJETO_VEICULO', 'imagem')
-                this.props.modificaCampo(source.data, 'MODIFICA_OBJETO_VEICULO', 'imagem_64')
-                //   this.setState({
-                //     avatarSource: source,
-                //   });
-            }
-        });
-    }
+    //             // You can also display the image using data:
+    //             // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+    //             console.log("SORRRRC", source.uri)
+    //             this.props.modificaCampo(source.uri, 'MODIFICA_OBJETO_VEICULO', 'imagem')
+    //             this.props.modificaCampo(source.data, 'MODIFICA_OBJETO_VEICULO', 'imagem_64')
+    //             //   this.setState({
+    //             //     avatarSource: source,
+    //             //   });
+    //         }
+    //     });
+    // }
 
     // b64toBlob(dataURI) {
 
@@ -115,10 +114,10 @@ class CadastroVeiculos extends Component {
         bodyFormData.append('tipo', this.props.tipo.val);
         bodyFormData.append('situacao', this.props.situacao.val);
         bodyFormData.append("imagem", this.props.imagem_64);
-        if(this.props.edit){
+        if (this.props.edit) {
             bodyFormData.append("id", this.props.item.id);
         }
-        
+
         return bodyFormData;
     }
 
@@ -148,7 +147,6 @@ class CadastroVeiculos extends Component {
             return;
         }
         let formObj = this.getFormData();
-        console.log("FORMMMOBJS", formObj)
         let edit = this.props.edit ? 1 : 0
         this.props.insertVeiculo(formObj, edit)
 
@@ -191,15 +189,15 @@ class CadastroVeiculos extends Component {
     }
 
     render() {
-        console.log("PROPSSSS", this.props, this.props.imagem_64)
+        console.log("PROPSSS", this.props)
         return (
 
             <View style={{ flex: 1, backgroundColor: 'white' }}>
                 <StatusBar backgroundColor={'#333'} backgroundColor='#333' barStyle="light-content" />
-               
+
 
                 <Header home />
-             
+
 
                 <ScrollView>
 
@@ -209,33 +207,14 @@ class CadastroVeiculos extends Component {
 
                             <Form style={{ paddingLeft: 10, }}>
 
-                                    <View style={styles.contentAddUserImage}>
+                                <View style={styles.contentAddUserImage}>
 
-                                    <TouchableWithoutFeedback onPress={() => this._takeImage()}>
+                                    <TouchableWithoutFeedback onPress={() => global.alert.alert('Em desenvolvimento.')}>
 
                                         <View style={[styles.cardProductImage, {
                                             width: 164,
                                             height: 171,
                                         }]}>
-                                            {/* {   this.props.imagem != null ?
-                                           
-                                                <Image
-                                                    style={{ width: '100%', height: '100%' }}
-                                                    source={{ uri: this.props.imagem }}
-                                                    />
-                                                :
-                                                this.props.imagem_64 != 'null' || this.props.imagem_64 != null   ?
-                                                <Image
-                                                    style={{ width: '100%', height: '100%' }}
-                                                    source={{uri:`data:image/png;base64,${this.props.imagem_64}`}} 
-                                                />  
-                                                :
-                                                 <Image
-                                                    style={{ width: '100%', height: '100%' }}
-                                                    source={require('../../../assets/images/default-car.png')}
-                                                />
-                                                   
-                                            } */}
                                             {this.props.edit &&
                                                 this._renderFoto(1)
                                                     // {this.props.imagem_64 == 'null' ?
@@ -269,13 +248,12 @@ class CadastroVeiculos extends Component {
                                                 // </View>
                                             }
 
-
                                         </View>
-                                </TouchableWithoutFeedback>
+                                    </TouchableWithoutFeedback>
 
-                                        <Text style={{ color: colors.greyText, fontSize: 16, marginTop: 10 }}>Foto</Text>
+                                    <Text style={{ color: colors.greyText, fontSize: 16, marginTop: 10 }}>Foto</Text>
 
-                                    </View>
+                                </View>
 
                                 <View style={[styles.contentSearchProduct, { marginVertical: 5, marginLeft: 0, marginRight: 10 }]}>
                                     <TextInput
