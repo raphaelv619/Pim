@@ -31,7 +31,9 @@
  
  1 - Primeiro dê 'npm install' na raiz do projeto para instalar todas as dependencias.
  
- 2
+ 2 - Para rodar a versão de produção rode 'npm run build', seguido de 'npm install -g serve' e depois 'serve -s build'. (Rode na raiz do projeto web)
+ 
+ 3 - Para rodar a versão de desenvolvimento rode 'npm run web'.
  
  
  
