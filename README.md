@@ -1,5 +1,5 @@
-# Pim
- repo for app and web projects
+# App e Web - Controle de Frota de Veículos
+ Este projeto é uma expansão da aplicação para Windows que fiz em C#, para Mobile e Web, usei o React Native para fazer o aplicativo e também para exportar o App para Web.
  
  ***Tutorial para rodar as aplicações***
  
